@@ -1,6 +1,6 @@
 package com.simulator.riding_school_simulator.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -29,6 +29,6 @@ public class User {
 
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
     @Lazy
-    @JsonIgnore
+    @JsonManagedReference
     private List<Horse> horses;
 }

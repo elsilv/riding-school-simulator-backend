@@ -33,4 +33,23 @@ public class UserService {
         }
         return userRepository.save(user);
     }
+
+    public Optional<Horse> buyHorse(Long userId, Horse horse) {
+        Optional<User> userOpt = userRepository.findById(userId);
+
+        if (userOpt.isPresent()) {
+            User user = userOpt.get();
+            Balance balance = user.getBalance();
+
+            BigDecimal horsePrice = BigDecimal.valueOf(horse.getPrice());
+            if (balance.getAmount().compareTo(horsePrice) >= 0) {
+                balance.setAmount(balance.getAmount().subtract(horsePrice));
+                horse.setOwner(user);
+                horseRepository.save(horse);
+                userRepository.save(user);
+                return Optional.of(horse);
+            }
+        }
+        return Optional.empty();
+    }
 }

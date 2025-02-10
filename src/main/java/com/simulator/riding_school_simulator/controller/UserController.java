@@ -29,4 +29,14 @@ public class UserController {
         User createdUser = userService.createUser(user);
         return ResponseEntity.ok(createdUser);
     }
+
+    @PostMapping("/{id}/buy-horse")
+    public ResponseEntity<String> buyHorse(@PathVariable Long id, @RequestBody Horse horse) {
+        Optional<Horse> purchasedHorse = userService.buyHorse(id, horse);
+        if (purchasedHorse.isPresent()) {
+            return ResponseEntity.ok("Horse purchased successfully!");
+        } else {
+            return ResponseEntity.badRequest().body("Insufficient balance or user not found.");
+        }
+    }
 }
