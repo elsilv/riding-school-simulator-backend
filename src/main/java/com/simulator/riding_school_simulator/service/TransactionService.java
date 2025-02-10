@@ -2,6 +2,7 @@ package com.simulator.riding_school_simulator.service;
 
 import com.simulator.riding_school_simulator.model.Balance;
 import com.simulator.riding_school_simulator.model.Transaction;
+import com.simulator.riding_school_simulator.model.User;
 import com.simulator.riding_school_simulator.repository.BalanceRepository;
 import com.simulator.riding_school_simulator.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class TransactionService {
     @Transactional
     public Transaction addTransaction(Transaction transaction) {
         Balance balance = balanceRepository.findById(1L)
-                .orElse(new Balance(1L, BigDecimal.ZERO));
+                .orElse(new Balance(1L, BigDecimal.ZERO, new User()));
 
         BigDecimal newBalance = balance.getAmount().add(transaction.getAmount());
         balance.setAmount(newBalance);

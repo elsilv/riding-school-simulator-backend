@@ -1,9 +1,6 @@
 package com.simulator.riding_school_simulator.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,4 +19,6 @@ public class Balance {
 
     private BigDecimal amount;
 
+    @OneToOne(mappedBy = "balance", cascade = CascadeType.ALL)
+    private User user;
 }

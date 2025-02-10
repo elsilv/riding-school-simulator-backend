@@ -18,4 +18,9 @@ public class Horse {
     private String size;
     private String character;
     private int price;
+
+    @ManyToOne
+    @JoinColumn(name = "owner_id")
+    private User owner;
+
 }
