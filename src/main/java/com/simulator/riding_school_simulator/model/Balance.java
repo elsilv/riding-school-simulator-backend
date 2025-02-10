@@ -1,5 +1,6 @@
 package com.simulator.riding_school_simulator.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,5 +21,7 @@ public class Balance {
     private BigDecimal amount;
 
     @OneToOne(mappedBy = "balance", cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JsonBackReference
     private User user;
 }

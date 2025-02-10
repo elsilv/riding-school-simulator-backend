@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
-
 @RestController
 @RequestMapping("/balance")
 public class BalanceController {
@@ -15,19 +13,19 @@ public class BalanceController {
     @Autowired
     private BalanceRepository balanceRepository;
 
-    @GetMapping
-    public ResponseEntity<BigDecimal> getBalance() {
-        Balance balance = balanceRepository.getCurrentBalance();
-        if (balance == null) {
-            return ResponseEntity.ok(BigDecimal.ZERO);
-        }
-        return ResponseEntity.ok(balance.getAmount());
-    }
-    
+    @GetMapping("/{userId}")
+            public ResponseEntity<Balance> getUserBalance(@PathVariable Long userId) {
+                Balance balance = balanceRepository.findByUserId(userId);
+                if (balance != null) {
+                    return ResponseEntity.ok(balance);
+                } else {
+                    return ResponseEntity.notFound().build();
+                }
+            }
 
     @PutMapping
-    public ResponseEntity<Balance> updateBalance(@RequestBody Balance newBalance) {
-        Balance balance = balanceRepository.getCurrentBalance();
+    public ResponseEntity<Balance> updateBalance(@RequestBody Balance newBalance, Long userId) {
+        Balance balance = balanceRepository.findByUserId(userId);
         balance.setAmount(newBalance.getAmount());
         balanceRepository.save(balance);
         return ResponseEntity.ok(balance);

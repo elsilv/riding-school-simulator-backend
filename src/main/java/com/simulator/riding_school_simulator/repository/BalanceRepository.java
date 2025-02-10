@@ -7,6 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface BalanceRepository extends JpaRepository<Balance, Long> {
-    @Query("SELECT b FROM Balance b WHERE b.id = 1")
-    Balance getCurrentBalance();
+    Balance findByUserId(Long userId);
 }
