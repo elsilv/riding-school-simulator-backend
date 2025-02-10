@@ -21,6 +21,12 @@ public class HorseController {
         return horseService.getAllHorses();
     }
 
+    @GetMapping("/available")
+    public List<Horse> getAvailableHorses() {
+        return horseService.getAvailableHorses();
+    }
+
+
     @PostMapping
     public Horse addHorse(@RequestBody Horse horse) {
         return horseService.addHorse(horse);
