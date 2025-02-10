@@ -23,8 +23,8 @@ public class BalanceController {
                 }
             }
 
-    @PutMapping
-    public ResponseEntity<Balance> updateBalance(@RequestBody Balance newBalance, Long userId) {
+    @PutMapping("/{userId}")
+    public ResponseEntity<Balance> updateBalance(@RequestBody Balance newBalance, @PathVariable Long userId) {
         Balance balance = balanceRepository.findByUserId(userId);
         balance.setAmount(newBalance.getAmount());
         balanceRepository.save(balance);
