@@ -1,5 +1,6 @@
 package com.simulator.riding_school_simulator.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -21,6 +22,7 @@ public class Horse {
 
     @ManyToOne
     @JoinColumn(name = "owner_id")
+    @JsonManagedReference
     private User owner;
 
 }

@@ -1,9 +1,11 @@
 package com.simulator.riding_school_simulator.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.context.annotation.Lazy;
 
 import java.util.List;
 
@@ -26,5 +28,7 @@ public class User {
     private Balance balance;
 
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
+    @Lazy
+    @JsonIgnore
     private List<Horse> horses;
 }
