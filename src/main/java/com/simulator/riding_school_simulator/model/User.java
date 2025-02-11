@@ -31,4 +31,6 @@ public class User {
     @Lazy
     @JsonManagedReference
     private List<Horse> horses;
+
+    private int stallLimit = 6;
 }

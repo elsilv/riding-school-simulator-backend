@@ -52,4 +52,23 @@ public class UserService {
         }
         return Optional.empty();
     }
+
+    public Optional<User> buyStall(Long userId) {
+        Optional<User> userOpt = userRepository.findById(userId);
+
+        if (userOpt.isPresent()) {
+            User user = userOpt.get();
+            Balance balance = user.getBalance();
+
+            int stallCost = 500;
+            if (balance.getAmount().compareTo(BigDecimal.valueOf(stallCost)) >= 0) {
+                user.setStallLimit(user.getStallLimit() + 1);
+                balance.setAmount(balance.getAmount().subtract(BigDecimal.valueOf(stallCost)));
+                userRepository.save(user);
+                return Optional.of(user);
+            }
+        }
+        return Optional.empty();
+    }
+
 }

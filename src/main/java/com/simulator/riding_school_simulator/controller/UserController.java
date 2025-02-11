@@ -39,4 +39,16 @@ public class UserController {
             return ResponseEntity.badRequest().body("Insufficient balance or user not found.");
         }
     }
+
+    @PutMapping("/{userId}/buy-stall")
+    public ResponseEntity<?> buyStall(@PathVariable Long userId) {
+        Optional<User> updatedUserOpt = userService.buyStall(userId);
+
+        if (updatedUserOpt.isPresent()) {
+            User updatedUser = updatedUserOpt.get();
+            return ResponseEntity.ok(updatedUser);
+        } else {
+            return ResponseEntity.badRequest().body("Insufficient balance or user not found.");
+        }
+    }
 }
