@@ -30,6 +30,9 @@ public class BillsService {
         return billsRepository.findAll();
     }
 
+    public List<Bills> getAllOwnedBills(Long userId) {
+        return billsRepository.findByUserId(userId);
+    }
     public Bills getBillsById(Long id) {
         Optional<Bills> bill = billsRepository.findById(id);
         return bill.orElse(null);
@@ -37,6 +40,10 @@ public class BillsService {
 
     public List<Bills> getAllUnpaidBills() {
         return billsRepository.findByPaidFalse();
+    }
+
+    public List<Bills> getAllUsersUnpaidBills(Long userId) {
+        return billsRepository.findByPaidFalseAndUserId(userId);
     }
 
     @Transactional

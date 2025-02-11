@@ -32,5 +32,10 @@ public class User {
     @JsonManagedReference
     private List<Horse> horses;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @Lazy
+    @JsonManagedReference
+    private List<Bills> bills;
+
     private int stallLimit = 6;
 }

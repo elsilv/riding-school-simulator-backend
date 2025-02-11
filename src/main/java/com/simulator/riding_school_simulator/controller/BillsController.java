@@ -19,9 +19,19 @@ public class BillsController {
         return billsService.getAllBills();
     }
 
+    @GetMapping("/{userId}")
+    public List<Bills> getAllOwnedBills(@PathVariable Long userId) {
+        return billsService.getAllOwnedBills(userId);
+    }
+
     @GetMapping("/unpaid")
     public List<Bills> getUnpaidBills() {
         return billsService.getAllUnpaidBills();
+    }
+
+    @GetMapping("/{userId}/unpaid")
+    public List<Bills> getAllUsersUnpaidBills(@PathVariable Long userId) {
+        return billsService.getAllUsersUnpaidBills(userId);
     }
 
     @PutMapping("/{id}/pay")
