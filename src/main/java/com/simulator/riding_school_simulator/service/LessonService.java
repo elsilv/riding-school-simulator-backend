@@ -24,6 +24,23 @@ public class LessonService {
         return lessonRepository.save(lesson);
     }
 
+    public Lessons updateLesson(Long id, Lessons updatedLesson) {
+        Optional<Lessons> existingLesson = lessonRepository.findById(id);
+        if (existingLesson.isPresent()) {
+            Lessons lesson = existingLesson.get();
+            lesson.setTitle(updatedLesson.getTitle());
+            lesson.setDateTime(updatedLesson.getDateTime());
+            lesson.setMaxStudents(updatedLesson.getMaxStudents());
+            lesson.setPrice(updatedLesson.getPrice());
+            lesson.setLessonType(updatedLesson.getLessonType());
+            lesson.setTeacherName(updatedLesson.getTeacherName());
+            lesson.setHorseAssigned(updatedLesson.getHorseAssigned());
+            lesson.setLessonStatus(updatedLesson.getLessonStatus());
+            return lessonRepository.save(lesson);
+        }
+        return null;
+    }
+
     public List<Lessons> getAllLessons() {
         return lessonRepository.findAll();
     }
@@ -37,4 +54,12 @@ public class LessonService {
         lessonRepository.deleteById(id);
     }
 
+    public Lessons updateLessonStatus(Long id, String status) {
+        Lessons lesson = getLessonById(id);
+        if (lesson != null) {
+            lesson.setLessonStatus(status);
+            return lessonRepository.save(lesson);
+        }
+        return null;
+    }
 }

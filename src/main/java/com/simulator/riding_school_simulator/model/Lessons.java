@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Getter
@@ -25,4 +26,13 @@ public class Lessons {
     private int currentStudents = 0;
 
     private double price;
+
+    private String lessonType; // e.g., Beginner, Advanced, Dressage
+
+    private String teacherName;
+
+    private String lessonStatus;
+
+    @ElementCollection
+    private List<String> horseAssigned;
 }

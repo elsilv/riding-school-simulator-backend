@@ -19,6 +19,11 @@ public class LessonController {
         return lessonService.createLesson(lesson);
     }
 
+    @PutMapping("/update/{id}")
+    public Lessons updateLesson(@PathVariable Long id, @RequestBody Lessons lesson) {
+        return lessonService.updateLesson(id, lesson);
+    }
+
     @GetMapping
     public List<Lessons> getAllLessons() {
         return lessonService.getAllLessons();
@@ -32,5 +37,10 @@ public class LessonController {
     @DeleteMapping("/{id}")
     public void deleteLesson(@PathVariable Long id) {
         lessonService.deleteLesson(id);
+    }
+
+    @PatchMapping("/status/{id}")
+    public Lessons updateLessonStatus(@PathVariable Long id, @RequestParam String status) {
+        return lessonService.updateLessonStatus(id, status);
     }
 }
